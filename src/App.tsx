@@ -48,6 +48,11 @@ function App() {
     floorColor: "#762340",
     floorSize: 200,
   };
+
+  console.log(
+    "♥ Thank you for being there during the tears and of course, the laughter. May you have a Happy Women’s Day!"
+  );
+
   return (
     <Canvas
       shadows
