@@ -103,7 +103,7 @@ function App() {
             />
           )}
           {/* <OrbitControls  /> */}
-          {axesHelper && <axesHelper />}
+          {/* {axesHelper && <axesHelper />} */}
         </Suspense>
       </Physics>
     </Canvas>
