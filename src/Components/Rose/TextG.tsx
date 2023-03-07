@@ -6,6 +6,7 @@ import { AdditiveBlending, DoubleSide, TextureLoader } from "three";
 const TextG = () => {
   const [colorMap] = useLoader(TextureLoader, ["./hihi.png"]);
   // console.log(colorMap);
+  localStorage.setItem("Design", "By Phạm Đắc Hiếu");
 
   return (
     <>

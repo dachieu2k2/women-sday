@@ -27,7 +27,7 @@ const Date = () => {
         // object.material.color = "white";
         object.material.emissive = new Color(1, 1, 1);
         object.material.roughness = 0.6;
-        console.log(object.material);
+        // console.log(object.material);
       }
     });
   }, [gltf]);
