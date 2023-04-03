@@ -94,12 +94,12 @@ function App() {
 
           {orbitcontrols && (
             <OrbitControls
-              autoRotate
-              autoRotateSpeed={0.1}
-              enablePan={false}
-              enableZoom={false}
-              minPolarAngle={Math.PI / 4}
-              maxPolarAngle={Math.PI / 4}
+            // autoRotate
+            // autoRotateSpeed={0.1}
+            // enablePan={false}
+            // enableZoom={false}
+            // minPolarAngle={Math.PI / 4}
+            // maxPolarAngle={Math.PI / 4}
             />
           )}
           {/* <OrbitControls  /> */}
