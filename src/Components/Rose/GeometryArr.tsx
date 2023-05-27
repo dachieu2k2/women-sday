@@ -15,7 +15,7 @@ const randomSize: () => Triplet = () => [
   Math.abs(Math.random() - 0.5),
 ];
 
-const randomPosition: () => Triplet = () => [0, 20 + Math.random() * 20, -4];
+const randomPosition: () => Triplet = () => [0, 10 + Math.random() * 20, -4];
 
 const Cube: React.FC<{ args: Triplet; positions: Triplet }> = ({
   args,
@@ -44,7 +44,7 @@ const Cube: React.FC<{ args: Triplet; positions: Triplet }> = ({
       ref={ref}
       castShadow
       receiveShadow
-      position={[0, 20 + Math.random() * 10, -5]}
+      position={[0, 10 + Math.random() * 20, -4]}
       onClick={(e) => (e.stopPropagation(), setClicked(!clicked))}
       onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
       onPointerOut={(e) => setHovered(false)}
