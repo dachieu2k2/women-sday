@@ -64,7 +64,7 @@ function App() {
         fov,
       }}
     >
-      <Physics>
+      <Physics gravity={[0, -10, 0]}>
         <Suspense fallback={null}>
           <color attach="background" args={["#f0f0f0"]} />
 

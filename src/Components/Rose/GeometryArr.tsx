@@ -15,6 +15,8 @@ const randomSize: () => Triplet = () => [
   Math.abs(Math.random() - 0.5),
 ];
 
+// const randomSize: () => Triplet = () => [0, 20 + Math.random() * 10, -5];
+
 const randomPosition: () => Triplet = () => [0, 10 + Math.random() * 20, -4];
 
 const Cube: React.FC<{ args: Triplet; positions: Triplet }> = ({
