@@ -11,6 +11,7 @@ import {
   Plane,
   Text,
   Torus,
+  Loader
 } from "@react-three/drei";
 import { useControls } from "leva";
 import Rose from "./Components/Rose/Rose";
@@ -54,6 +55,7 @@ function App() {
   );
 
   return (
+    <>
     <Canvas
       shadows
       gl={{ antialias: false }}
@@ -107,6 +109,8 @@ function App() {
         </Suspense>
       </Physics>
     </Canvas>
+    <Loader/>
+    </>
   );
 }
 
