@@ -1,4 +1,3 @@
-import { ThreeEvent } from "@react-three/fiber";
 // import {
 //   BallCollider,
 //   CuboidCollider,
@@ -6,11 +5,6 @@ import { ThreeEvent } from "@react-three/fiber";
 //   RapierRigidBody,
 //   InstancedRigidBodyProps,
 // } from "@react-three/rapier";
-import { useEffect, useMemo, useRef } from "react";
-import * as THREE from "three";
-
-const COUNT = 100;
-const box = new THREE.BoxGeometry(1, 1, 1);
 
 const GeometryArrT2 = () => {
   // const api = useRef<RapierRigidBody[]>(null);
