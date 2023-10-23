@@ -1,6 +1,4 @@
-import { Text, useTexture } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
-import React from "react";
 import { AdditiveBlending, DoubleSide, TextureLoader } from "three";
 
 const TextG = () => {
@@ -30,6 +28,8 @@ const TextG = () => {
         rotation={[-Math.PI / 2, 0, 0]}
         position={[0.1, -0.09, 0.1]}
         scale={0.2}
+        receiveShadow
+        castShadow
       >
         <planeGeometry args={[10, 10]} />
         <meshStandardMaterial

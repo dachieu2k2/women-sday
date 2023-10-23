@@ -1,6 +1,4 @@
-import { useFrame, useThree } from "@react-three/fiber";
-import { useControls } from "leva";
-import React from "react";
+import { useThree } from "@react-three/fiber";
 
 const ResponsiveCamera = () => {
   const { x, y, z } = {

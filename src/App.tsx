@@ -1,4 +1,4 @@
-import { Suspense, useRef, useState } from "react";
+import { useRef } from "react";
 import "./App.css";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Lightformer, Loader } from "@react-three/drei";
@@ -12,33 +12,34 @@ import { Physics } from "@react-three/cannon";
 import Rose from "./Components/Rose/Rose";
 import { easing } from "maath";
 import Date from "./Components/Rose/Date";
+import { Overlay } from "./Components/Interfaces";
 
 const t = new Vector3(0, 0, 0);
 
 function App() {
-  const {
-    orbitcontrols,
-    axesHelper,
-    near,
-    far,
-    fov,
-    intensity,
-    directionalLightIntensity,
-    directionalLightColor,
-    floorColor,
-    floorSize,
-  } = {
-    intensity: 0.8,
-    orbitcontrols: true,
-    axesHelper: true,
-    near: 30,
-    far: 55,
-    fov: 18,
-    directionalLightIntensity: 3.6,
-    directionalLightColor: "white",
-    floorColor: "#762340",
-    floorSize: 200,
-  };
+  // const {
+  //   orbitcontrols,
+  //   axesHelper,
+  //   near,
+  //   far,
+  //   fov,
+  //   intensity,
+  //   directionalLightIntensity,
+  //   directionalLightColor,
+  //   floorColor,
+  //   floorSize,
+  // } = {
+  //   intensity: 0.8,
+  //   orbitcontrols: true,
+  //   axesHelper: true,
+  //   near: 30,
+  //   far: 55,
+  //   fov: 18,
+  //   directionalLightIntensity: 3.6,
+  //   directionalLightColor: "white",
+  //   floorColor: "#762340",
+  //   floorSize: 200,
+  // };
 
   console.log(
     "♥ Thank you for being there during the tears and of course, the laughter. May you have a Happy Women’s Day!"
@@ -89,7 +90,7 @@ function App() {
           <Date />
           {/* <OrbitControls /> */}
           {/* <SoftShadows /> */}
-          {/* <SoftShadows /> */}
+          {/* <SoftShadows size={0.3} /> */}
           <Environment
             frames={Infinity}
             preset="sunset"
@@ -141,8 +142,8 @@ function App() {
             <group>
               <Lightformer
                 intensity={5}
-                form="rect"
-                color="lightblue"
+                form="ring"
+                color="blue"
                 rotation-y={Math.PI / 2}
                 position={[-5, 2, -1]}
                 scale={[10, 10, 1]}
@@ -153,6 +154,7 @@ function App() {
         <ResponsiveCamera />
       </Canvas>
       <Loader />
+      <Overlay />
     </>
   );
 }
