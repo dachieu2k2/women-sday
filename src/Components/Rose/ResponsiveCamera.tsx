@@ -4,16 +4,16 @@ import React from "react";
 
 const ResponsiveCamera = () => {
   const { x, y, z } = {
-    x: -20 + 8,
-    y: 45 + 8,
-    z: 30 + 8,
+    x: 1.2089696907753384,
+    y: 6.329032705533957,
+    z: 3.7210859345481277,
   };
   const { size, camera } = useThree((state) => state);
 
   if (size.width <= 768) {
     camera.position.set(x, y, z);
   } else {
-    camera.position.set(-35, 30, 20);
+    camera.position.set(x, y, z);
   }
 
   return <></>;

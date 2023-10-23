@@ -27,8 +27,9 @@ const TextG = () => {
       </Text> */}
       {/* <directionalLight></directionalLight> */}
       <mesh
-        rotation={[-Math.PI / 2, 0, -Math.PI / 3.5]}
-        position={[-2, 0.1, -3]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0.1, -0.09, 0.1]}
+        scale={0.2}
       >
         <planeGeometry args={[10, 10]} />
         <meshStandardMaterial

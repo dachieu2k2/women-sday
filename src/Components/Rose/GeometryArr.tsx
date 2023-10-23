@@ -1,87 +1,116 @@
-import { Color, InstancedMesh, MathUtils, Mesh, Vector3 } from "three";
-import { Triplet, useBox } from "@react-three/cannon";
-import { useMemo, useState } from "react";
-import React from "react";
+import type { Triplet } from "@react-three/cannon";
+import { useBox, useSphere } from "@react-three/cannon";
 import { useFrame } from "@react-three/fiber";
-import { useCursor } from "@react-three/drei";
+import { useMemo, useRef, useState } from "react";
+import type { InstancedMesh } from "three";
+import { Color } from "three";
 
-const count = 150;
+import niceColors from "../colors";
 
-const arrCube: { randomPosition: Triplet; randomSize: Triplet }[] = [];
+type InstancedGeometryProps = {
+  colors: Float32Array;
+  number: number;
+  size: number;
+};
 
-const randomSize: () => Triplet = () => [
-  Math.abs(Math.random() - 0.5),
-  Math.abs(Math.random() - 0.5),
-  Math.abs(Math.random() - 0.5),
-];
-
-// const randomSize: () => Triplet = () => [0, 20 + Math.random() * 10, -5];
-
-const randomPosition: () => Triplet = () => [0, 10 + Math.random() * 20, -4];
-
-const Cube: React.FC<{ args: Triplet; positions: Triplet }> = ({
-  args,
-  positions,
-}) => {
-  const [ref] = useBox<Mesh>(() => ({
-    mass: 1,
-    position: positions,
-    args: args,
-    type: "Dynamic",
-  }));
-
-  const [hovered, setHovered] = useState(false);
-  const [clicked, setClicked] = useState(false);
-
-  useFrame((state) =>
-    ref.current?.scale.setScalar(
-      hovered ? 1 + Math.sin(state.clock.elapsedTime * 10) / 5 : 1
+const Spheres = ({ colors, number, size }: InstancedGeometryProps) => {
+  const [ref, { at }] = useSphere(
+    () => ({
+      args: [size],
+      mass: 1,
+      position: [Math.random() - 0.5, Math.random() * 10, Math.random() - 0.5],
+    }),
+    useRef<InstancedMesh>(null)
+  );
+  useFrame(() =>
+    at(Math.floor(Math.random() * number)).position.set(
+      0,
+      Math.random() * 10,
+      0
     )
   );
-  // Sets document.body.style.cursor: useCursor(flag, onPointerOver = 'pointer', onPointerOut = 'auto')
-  useCursor(hovered);
-
   return (
-    <mesh
-      ref={ref}
-      castShadow
+    <instancedMesh
       receiveShadow
-      position={[0, 10 + Math.random() * 20, -4]}
-      onClick={(e) => (e.stopPropagation(), setClicked(!clicked))}
-      onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
-      onPointerOut={(e) => setHovered(false)}
+      castShadow
+      ref={ref}
+      args={[undefined, undefined, number]}
     >
-      <boxGeometry args={args} />
-      <meshStandardMaterial
-        // color={"#205E61"}
-        color={clicked ? "lightblue" : hovered ? "aquamarine" : "#205E61"}
-      />
-    </mesh>
+      <sphereGeometry args={[size, 48]}>
+        <instancedBufferAttribute
+          attach="attributes-color"
+          args={[colors, 3]}
+        />
+      </sphereGeometry>
+      <meshLambertMaterial vertexColors />
+    </instancedMesh>
   );
 };
 
-// position={[-1, 0.1, -4]}
+const Boxes = ({ colors, number, size }: InstancedGeometryProps) => {
+  const args: Triplet = [size, size, size];
+  const [ref, { at }] = useBox(
+    () => ({
+      args,
+      mass: 1,
+      position: [
+        Math.random() - 0.5,
+        Math.random() * 2 + 4,
+        Math.random() - 0.5,
+      ],
+    }),
+    useRef<InstancedMesh>(null)
+  );
+  useFrame(() =>
+    at(Math.floor(Math.random() * number)).position.set(
+      0,
+      Math.random() * 2 + 4,
+      0
+    )
+  );
+  return (
+    <instancedMesh
+      receiveShadow
+      castShadow
+      ref={ref}
+      args={[undefined, undefined, number]}
+    >
+      <boxGeometry args={args}>
+        <instancedBufferAttribute
+          attach="attributes-color"
+          args={[colors, 3]}
+        />
+      </boxGeometry>
+      <meshStandardMaterial vertexColors />
+    </instancedMesh>
+  );
+};
 
-function GeometryArr() {
-  useMemo(() => {
-    for (let i = 0; i < count; i++) {
-      arrCube.push({
-        randomSize: randomSize(),
-        randomPosition: randomPosition(),
-      });
-    }
-  }, []);
+const instancedGeometry = {
+  box: Boxes,
+  sphere: Spheres,
+};
+
+export default () => {
+  const [number] = useState(200);
+  const [size] = useState(0.1);
+
+  const colors = useMemo(() => {
+    const array = new Float32Array(number * 3);
+    const color = new Color();
+    for (let i = 0; i < number; i++)
+      color
+        .set(niceColors[Math.floor(Math.random() * 5)])
+        .convertSRGBToLinear()
+        .toArray(array, i * 3);
+    return array;
+  }, [number]);
+
+  const InstancedGeometry = instancedGeometry["box"];
+
   return (
     <>
-      {arrCube.map((value, index) => {
-        return (
-          <React.Fragment key={index}>
-            <Cube args={value.randomSize} positions={value.randomPosition} />
-          </React.Fragment>
-        );
-      })}
+      <InstancedGeometry {...{ colors, number, size }} />
     </>
   );
-}
-
-export default GeometryArr;
+};
