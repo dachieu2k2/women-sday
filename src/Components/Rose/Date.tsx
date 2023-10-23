@@ -1,6 +1,6 @@
-import { MeshTransmissionMaterial, useGLTF } from "@react-three/drei";
-import { ReactThreeFiber, useLoader } from "@react-three/fiber";
-import React, { useEffect, useRef } from "react";
+import { useGLTF } from "@react-three/drei";
+import { useLoader } from "@react-three/fiber";
+import { useEffect } from "react";
 import * as THREE from "three";
 // import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
